@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-store, must-revalidate">
+<meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT">
+<meta http-equiv="expires" content="0">
+<link rel="shortcut icon" href="/cpp/favicon.ico?v=3.998" />
+<link href="/cpp/templets/new/style/common.css?v=3.998" rel="stylesheet" type="text/css" />
+<title>C语言feof()函数：检查流上文件的结束标识(是否读到文件结尾)_C语言中文网</title>
+<meta name="keywords" content="feof,文件,#include,stdio.h,feof," />
+<meta name="description" content="头文件：#include stdio.h feof()函数用来检测当前文件流上的文件结束标识，判断是否读到了文件结尾，其原型为： int feof(FILE * stream); 【参数】stream为文件流指针。 【返回值】检测到文件结束标识返回1，否则返回0。 文件结束标识一般由上次的读写操作" />
+</head>
+<body>
+<div id="topbar-wrap">
+<div id="topbar" class="clearfix">
+<ul id="nav-top" class="left clearfix hover-none">
+<li><a href="/cpp/compiler/">编程软件下载/编译器下载</a></li>
+</ul>
+<ul id="ad-link-top" class="left hover-none">
+<li class="sub-menu" style="color: #D33428;">&nbsp;&nbsp;C语言辅导班<span class="icon">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<ul>
+<li><a href="http://fudao.biancheng.net/c/" target="_blank">普通班(600元)</a></li>
+<li><a href="http://fudao.biancheng.net/c_abroad/" target="_blank">留学生班(3000元)</a></li>
+</ul>
+</li>
+<li class="sub-menu" style="color: #009300;">&nbsp;&nbsp;C++辅导班<span class="icon">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<ul>
+<li><a href="http://fudao.biancheng.net/cpp/" target="_blank">普通班(1000元)</a></li>
+<li><a href="http://fudao.biancheng.net/cpp_abroad/" target="_blank">留学生班(3000元)</a></li>
+</ul>
+</li>
+<li class="sub-menu" style="color: #AD9700;">&nbsp;&nbsp;算法/数据结构辅导班<span class="icon">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<ul>
+<li><a href="http://fudao.biancheng.net/data/" target="_blank">普通班(600元)</a></li>
+<li><a href="http://fudao.biancheng.net/data_abroad/" target="_blank">留学生班(3000元)</a></li>
+</ul>
+</li>
+</ul>
+<div class="right clearfix" id="user-info"></div>
+</div>
+</div>
+<div id="header_wrap" class="clearfix">
+<div id="header" class="hover-none">
+<a id="logo" class="left" href="/cpp/"><img src="/cpp/templets/new/images/logo.jpg?v=3.998" alt="C语言中文网"></a>
+<ul id="nav-main" class="left clearfix">
+<li><a href="/cpp/">首页</a></li>
+<li><a href="/c/">C语言教程</a></li>
+<li><a href="/cplus/">C++教程</a></li>
+<li><a href="/python/">Python教程</a></li>
+<li><a href="/java/">Java教程</a></li>
+<li><a href="/linux_tutorial/">Linux入门</a></li>
+<li><a href="/sitemap/" title="网站地图">更多&gt;&gt;</a></li>
+<li class="bubble"><a href="http://vip.biancheng.net/p/vip/show.php" style="color: #D33428;" target="_blank">VIP会员</a><span class="hot">&nbsp;</span></li>
+<li class="bubble"><a href="http://fudao.biancheng.net/" style="color: #009300;" target="_blank">辅导班</a><span class="sale">&nbsp;</span></li>
+</ul>
+</div>
+</div>
+<div id="position" class="clearfix"><a href='http://c.biancheng.net/cpp/'>首页</a><span>&nbsp;&nbsp;/&nbsp;&nbsp;</span><a href='/cpp/u/biaozhunku/'>C语言标准库</a><span>&nbsp;&nbsp;/&nbsp;&nbsp;</span><a href='/cpp/u/stdio_h/'>stdio.h</a><span>&nbsp;&nbsp;/&nbsp;&nbsp;</span></div>
+<div id="main" class="clearfix sidebar-on-right">
+<div id="article" class="article">
+<h1>C语言feof()函数：检查流上文件的结束标识(是否读到文件结尾)</h1>
+<div class="art-info clearfix">
+<dl class="follow-us left hover-none"></dl>
+</div>
+<div id="ad-arc-top-diy"></div>
+<div id="art-body">头文件：#include &lt;stdio.h&gt;<br />
+<br />
+feof()函数用来检测当前文件流上的文件结束标识，判断是否读到了文件结尾，其原型为：<br />
+&nbsp; &nbsp; int feof(FILE * stream);<br />
+<br />
+【参数】stream为文件流指针。<br />
+<br />
+【返回值】检测到文件结束标识返回1，否则返回0。<br />
+<br />
+文件结束标识一般由上次的读写操作来设置，当然也可以手动设置。<br />
+<br />
+当文件内部的位置指针指向文件结束时，并不会立即设置FILE结构中的文件结束标识，只有再执行一次读文件操作，才会设置结束标志，此后调用feof()才会返回为真。<br />
+<br />
+文件结束标识可以由 <a href="/cpp/html/2509.html" target="_blank">clearerr()</a>、<a href="/cpp/html/264.html" target="_blank">rewind()</a>、<a href="/cpp/html/2518.html" target="_blank">fseek()</a>、<a href="/cpp/html/2422.html" target="_blank">fsetpos()</a> 和 <a href="/cpp/html/2508.html" target="_blank">freopen()</a> 函数清除；如果这时位置指针未被重置，那么将在下次 I/O 操作时进行设置。<br />
+<br />
+更多信心请参考：<a href="/cpp/html/2416.html" target="_blank">C语言FILE结构体</a><br />
+<br />
+<span style="color:#b22222;">注意，feof()与EOF不同：feof()是函数，用来检测文件的结束；EOF是 End Of File 的缩写，是C语言中标准库中定义的宏，定义为：#define&nbsp; EOF&nbsp; (-1)。</span><br />
+<br />
+EOF的值为-1，是 int 类型数据，在32位系统中，可以表示为0xFFFFFFFF；EOF 不是一个字符，也不是文件中实际存在的内容。EOF不但能表示读文件到了结尾这一状态，它还能表示 I/O 操作中的读、写错误（可以用 ferror() 来检测）以及其它一些关联操作的错误状态。<br />
+<br />
+fgetc() 或getc() 等函数返回EOF并不一定表示文件结束，当读取文件出错时也会返回EOF，仅凭返回 -1 就认为文件结束是错误的；正因为如此，我们需要feof()来判断文件是否结束，当然用feof()来判断文件结束时也需要判断读取操作是否出错，这时可以用ferror()来判断，当其为真时表示有错误发生。在实际的程序中，应该每执行一次文件操作，就用用ferror()函数检测是否出错。<br />
+<br />
+例如，有一个文件指针fp，文件中有字符串&ldquo;hello world&rdquo;：
+<pre class="c">
+int c=0;
+while( !feof(fp) )
+{
+    int c=fgetc(fp);
+    printf(&quot;%c: %x \n&quot;, c, c);
+}</pre>
+上面的代码除了输出 hello 外，还会输出一个结束字符EOF（EOF是fgetc函数的返回值，并不是文件中存在EOF）。其原因就是当内部位置指针指向结尾时，还要执行一次读操作，文件结束标识才会被设置。<br />
+<br />
+对上面代码进行更改：
+<pre class="c">
+int c; 
+c=fgetc(fp);     
+while( !feof(fp) ) 
+{    
+    printf(&quot;%c: %x \n&quot;, c, c); 
+    c=fgetc(fp); 
+}  </pre>
+上面的代码只输出&ldquo;hello&rdquo;不输出文件结束符EOF。当文件内部位置指针指向结束位置时，先执行一次读操作，设置文件结束标识，while循环立即结束。<br />
+<br />
+【实例】读取一个文件直到结束，然后回到开头重新读取。
+<pre class="c">
+#include&lt;iostream.h&gt;
+#include&lt;stdio.h&gt;
+void main(void)
+{
+    FILE* stream;
+    long l;
+    float fp;
+    char s[81];
+    char c;
+    stream = fopen(&quot;fscanf.txt&quot;,&quot;w+&quot;);
+    if(stream == NULL)  /*打开文件失败*/
+    {
+        printf(&quot;the file is opeaned error!\n&quot;);
+    }
+    else
+    {
+        fprintf(stream,&quot;%s %ld %f %c&quot;,&quot;a_string&quot;,6500,3.1415,&#39;x&#39;);
+        fseek(stream,0L,SEEK_SET);  /*定位读写指针*/
+        fscanf(stream,&quot;%s&quot;,s);
+        printf(&quot;%ld\n&quot;,ftell(stream));
+        fscanf(stream,&quot;%ld&quot;,&amp;l);
+        printf(&quot;%ld\n&quot;,ftell(stream));
+        fscanf(stream,&quot;%f&quot;,&amp;fp);
+        printf(&quot;%ld\n&quot;,ftell(stream));
+        fscanf(stream,&quot; %c&quot;,&amp;c);
+        printf(&quot;%ld\n&quot;,ftell(stream));
+        fgetc(stream);  /*使指针到结尾*/
+        if(!ferror(stream))
+        {
+            if(feof(stream))  /*如果不是结束*/
+            {
+                printf(&quot;We have reached end-of-file\n&quot;);
+                rewind(stream);
+                fscanf(stream,&quot;%s&quot;,s);
+                printf(&quot;%s\n&quot;,s);
+            }
+        }
+       
+        fclose(stream);
+    }
+}</pre>
+运行结果：<br />
+8<br />
+13<br />
+22<br />
+24<br />
+We have reached end-of-file<br />
+a_string<br />
+<br />
+程序先创建一个文件，写入4个类型的数据，然 后把读/写指针定位到文件开头逐个读取并输出当前指针的位置， 如果到了文件结尾则提示已经到达文件结尾，重新定位文件到开头并读取一个字符串。<br />
+</div>
+<div id="ad-arc-bottom-diy"></div>
+<div id="ad-bottom-weixin" class="clearfix">
+<div class="left" style="width: 535px;">
+<p><span class="col-red">编程帮</span>，一个分享编程知识的公众号。跟着<a class="col-link" href="/cpp/about/author/" target="_blank">站长</a>一起学习，每天都有进步。</p>
+<p>通俗易懂，深入浅出，一篇文章只讲一个知识点。</p>
+<p>文章不深奥，不需要钻研，在公交、在地铁、在厕所都可以阅读，随时随地涨姿势。</p>
+<p>文章不涉及代码，不烧脑细胞，人人都可以学习。</p>
+<p>当你决定关注「编程帮」，你已然超越了90%的程序员！</p>
+</div>
+<div class="right" style="width: 150px;">
+<img width="150" src="/cpp/templets/new/images/erweima_biancheng.png?v=3.998" alt="编程帮二维码" /><br />
+<span class="col-green">微信扫描二维码关注</span>
+</div>
+</div>
+<div class="art-info clearfix">
+<dl class="follow-us left hover-none"></dl>
+</div>
+</div>
+<div id="sidebar" class="sidebar">
+<dl class="arc-list sub-sort">
+<dt class="clearfix"><h4><span>下级分类</span></h4></dt>
+<dd class='this'><a href='/cpp/u/stdio_h/'>stdio.h</a></dd>
+<dd><a href='/cpp/u/stdlab_h/'>stdlib.h</a></dd>
+<dd><a href='/cpp/u/conio_h/'>conio.h</a></dd>
+<dd><a href='/cpp/u/alloc_h/'>alloc.h</a></dd>
+<dd><a href='/cpp/u/graphics_h/'>graphics.h</a></dd>
+<dd><a href='/cpp/u/system_h/'>system.h</a></dd>
+<dd><a href='/cpp/u/string_h/'>string.h</a></dd>
+<dd><a href='/cpp/u/ctype_h/'>ctype.h</a></dd>
+<dd><a href='/cpp/u/math_h/'>math.h</a></dd>
+<dd><a href='/cpp/u/locale_h/'>locale.h</a></dd>
+</dl>
+<dl class="arc-list arc-c">
+<dt class="clearfix"><h4><span>本站精品教程</span></h4></dt>
+<dd><a href='/cpp/u/jiaocheng/'>C语言教程</a></dd>
+<dd><a href='/cpp/biancheng/cpp/rumen/'>C++教程</a></dd>
+<dd><a href='/cpp/u/c20/'>C语言和内存</a></dd>
+<dd><a href='/cpp/u/c16/'>C语言多文件编程（模块化开发）</a></dd>
+<dd><a href='/cpp/socket/'>C/C++ socket编程（网络编程）</a></dd>
+<dd><a href='/cpp/linux/'>Linux教程</a></dd>
+<dd><a href='/cpp/shell/'>Shell教程</a></dd>
+<dd><a href='/cpp/windows/'>Windows编程</a></dd>
+<dd><a href='http://data.biancheng.net/'>数据结构与算法教程（更新中）</a></dd>
+</dl>
+<div id="weixin-sidebar">
+<img width="250" src="/cpp/templets/new/images/erweima_biancheng_sidebar.png?v=3.998" alt="编程帮二维码" />
+<p><span class="col-green">编程帮</span>，一个分享编程知识的公众号，跟着<a class="col-link" href="/cpp/about/author/" target="_blank">站长</a>一起学习。</p>
+</div>
+</div>
+</div>
+<div id="footer-wrap" class="clearfix">
+<div id="footer" class="clearfix">
+<div class="left" style="_width: 600px;">
+<ul id="nav-bottom" class="clearfix">
+<li>
+<a href="/view/8066.html" target="_blank" rel="nofollow">关于网站</a>
+<span class="blank">|</span>
+</li>
+<li>
+<a href="/view/8092.html" target="_blank" rel="nofollow">关于站长</a>
+<span class="blank">|</span>
+</li>
+<li>
+<a href="/view/8097.html" target="_blank" rel="nofollow">如何完成一部教程</a>
+<span class="blank">|</span>
+</li>
+<li>
+<a href="/view/8093.html" target="_blank" rel="nofollow">联系我们</a>
+<span class="blank">|</span>
+</li>
+<li>
+<a href="/sitemap/" target="_blank" rel="nofollow">网站地图</a>
+<span class="blank">|</span>
+</li>
+<li>
+<a href="http://m.biancheng.net/" target="_blank" rel="nofollow">手机版网站</a>
+</li>
+</ul>
+<p>
+精美而实用的网站，关注编程技术，追求极致，让您轻松愉快的学习。<br />
+Copyright &copy;2011-2015 biancheng.net, All Rights Reserved，<a href="http://www.beian.miit.gov.cn/" target="_blank" rel="nofollow" style="color: #666;">陕ICP备15000209号</a>
+</p>
+</div>
+<img id="logo-bottom" class="right" src="/cpp/templets/new/images/logo_bottom.jpg?v=3.998" alt="底部Logo" />
+</div>
+</div>
+<script type="text/javascript">
+    var cmsPath = '/cpp', // CMS安装目录，不带 /
+        cmsTemplets = '/cpp/templets/new', // 模板目录，不带 /
+        cmsTempletsVer = 3.998;  // 版本号
+</script>
+<script src="/cpp/templets/new/script/jquery.min.js?v=3.998" type="text/javascript"></script>
+<script src="/cpp/templets/new/script/common.js?v=3.998" type="text/javascript"></script>
+<span id="cnzz-wrap">
+<script type="text/javascript">
+        var cnzz = {};
+
+        cnzz.positionHref = $("#position").children('a')[1];
+        cnzz.positionHref && ( cnzz.positionHref = cnzz.positionHref.getAttribute('href') );
+        cnzz.protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        cnzz.webName = 'c';
+
+        cnzz.webIdObj = {
+            'c': '3875484',
+            'cpp': '4153548',
+            'swift': '5937701',
+            'shell': '5809059',
+            'danpianji': '5867261'
+        };
+
+        if(cnzz.positionHref) if( /^\/cpp\/biancheng/.test(cnzz.positionHref) ){
+            cnzz.webName = 'cpp';
+        }else if( /^\/cpp\/swift/.test(cnzz.positionHref) ){
+            cnzz.webName = 'swift';
+        }else if( /^\/cpp\/shell/.test(cnzz.positionHref) ){
+            cnzz.webName = 'shell';
+        }else if( /^\/cpp\/danpianji/.test(cnzz.positionHref) ){
+            cnzz.webName = 'danpianji';
+        }
+
+        document.write(unescape("%3Cspan id='cnzz_stat_icon_"+ cnzz.webIdObj[cnzz.webName] +"'%3E%3C/span%3E%3Cscript src='" + cnzz.protocol + "s6.cnzz.com/stat.php%3Fid%3D"+ cnzz.webIdObj[cnzz.webName] +"' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+</span>
+<script type="text/javascript">
+// 当前文章ID
+window.thisArtId = 2514;
+</script>
+</body>
+</html>
